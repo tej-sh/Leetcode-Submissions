@@ -1,14 +1,10 @@
 class Solution:
     def smallestNumber(self, n: int, t: int) -> int:
-        print(n)
-        i = n
-        while(n!=0):
+        for i in range(n,101):
             j = str(i)
             product = 1
-            print(f"j:{j}")
             for z in j:
-                print(f"z{z}")
                 product *= int(z)
-            if product%t ==0:
-                return i
-            i+=1
+                if product%t ==0:
+                    return i
+            
