@@ -1,7 +1,5 @@
 class Solution:
     def smallestNumber(self, n: int) -> int:
-        binary =bin(n)[2::]
-        res = "1"*len(binary)
-        return (int(res,2))
+        b = "1"*len(bin(n)[2::])
         
-        
+        return int(b,2)
