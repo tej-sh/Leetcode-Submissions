@@ -7,7 +7,6 @@ class Solution:
             s1 = sum(x)
             y = nums[i:n]
             s2 = sum(y)
-            # print(x,y)
             if (s1+s2)%2 == 0 :
                 c+=1
         return c
