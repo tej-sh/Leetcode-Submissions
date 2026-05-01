@@ -3,11 +3,6 @@ class Solution:
         """
         Do not return anything, modify s in-place instead.
         """
-        n =len(s)
-        def rev(l,r):
-            if l>=n//2:
-                return 
-            s[l],s[r] = s[r],s[l]
-            return rev(l+1,r-1)
-        rev(0,n-1)
-
+        n = len(s)
+        for i in range(n//2):
+            s[i],s[n-i-1] = s[n-i-1] , s[i]
