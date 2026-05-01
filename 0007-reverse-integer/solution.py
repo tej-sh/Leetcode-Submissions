@@ -1,20 +1,16 @@
 class Solution:
     def reverse(self, x: int) -> int:
-        flag = False
-        if x<0:
-            flag = True
-
-        x = str(x)
-
-        rev = x[::-1]
-        s = len(x)
-        if flag:
-            rev = int(rev[:s-1:])
-            if rev > 2**31 -1:
+        digits = str(x)
+        if digits[0] == '-':
+            digits = digits[1::]
+            if int(digits[::-1]) > 2**31:
                 return 0
-            return 0-rev
+            else:
+                return 0 - int(digits[::-1])
         else:
-            if int(rev) > 2**31 -1:
+            if int(digits[::-1]) > 2**31-1:
                 return 0
-            return int(rev)
-            
+            else:
+                return int(digits[::-1])
+
+   
