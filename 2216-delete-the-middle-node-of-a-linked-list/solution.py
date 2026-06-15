@@ -12,9 +12,10 @@ class Solution:
         prev = None
         while fast and fast.next:
             prev = slow
-            slow = slow.next
             fast = fast.next.next
+            slow = slow.next
         
         prev.next = slow.next
         return head
+        
         
