@@ -1,36 +1,17 @@
 class Solution:
     def maxNumberOfBalloons(self, text: str) -> int:
-        target = "".join(sorted("balloon"))
-        s = "".join(sorted(text))
-        t = {}
-        for i in target:
-            if i in t:
-                t[i] += 1
-            else:
-                t[i] = 1
-        
-        d = {}
-        for i in s:
-            if i in d and i in t:
-                d[i] += 1
-            else:
-                if i in t:
-                    d[i] = 1
-
-        pos =""
-        # print(d)
-        # print(t)
-        for i in t:
+        d ={
+            "b":0,"a":0,"l":0,"o":0,"n":0
+        }
+        two = "lo"
+        ans = float(inf)
+        for i in text:
             if i in d:
-                if pos == "":
-                    pos = int(d[i]/t[i])
-                else:
-                    pos = min(pos,int(d[i]/t[i]))
-            else:
-                pos = 0
-                return 0
-        return pos
+                d[i] +=1
         
-            
-
-
+        for i in d:
+            if i in two:
+                ans = min(d[i]//2,ans)
+            else:
+                ans =min(d[i],ans)
+        return ans if ans != float("inf") else 0
