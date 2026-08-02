@@ -1,42 +1,32 @@
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
+         
+        def find(x):
+            if parent[x] == x:
+                return x
+            parent[x] = find(parent[x])
+            return parent[x]
         
-        from collections import deque
+        def union(x,y):
+            x_parent = find(x)
+            y_parent = find(y)
+            if x_parent == y_parent:
+                return
+            if rank[x_parent] < rank[y_parent]:
+                parent[x_parent] = y_parent
+            elif rank[y_parent] < rank[x_parent]:
+                parent[y_parent] = x_parent
+            else:
+                parent[x_parent] = y_parent
+                rank[y_parent]+=1
 
-        def bfs(adj,u):
-            q = deque()
-            visited[u] = True
-            q.append(u)
-            
-            while q:
-                r = q.popleft()
-                for v in adj[r]:
-                    if not visited[v]:
-                        q.append(v)
-                        visited[v] = True
+        n = len(isConnected)
+        rank = [0]*n
+        parent = [i for i in range(n)]
 
-            
-
-        def dfs(adj,u):
-            visited[u] = True
-
-            for v in adj[u]:
-                if not visited[v]:
-                    dfs(adj,v)
-
-        m = len(isConnected)
-        adj = [[] for _ in range(m)]
-        for i in range(m):
-            for j in range(m):
-                if i == j:
-                    continue
-                if isConnected[i][j] == 1:
-                    adj[i].append(j)
-        print(adj)
-        visited = [False]*m
-        res = 0
-        for i in range(m):
-            if not visited[i]:
-                bfs(adj,i)
-                res+=1
-        return res
+        for i in range(n):
+            for j in range(i+1,n):
+                if isConnected[i][j] ==1:
+                    union(i,j)
+        return sum(1 for i in range(n) if find(i) == i)
+        
